@@ -4,7 +4,11 @@ import Link from "next/link"
 import { sanityClient, urlFor } from "../../sanity"
 import { Collection } from "../../typings"
 
-const NFTDropPage = ({ collection }: Collection) => {
+interface Props {
+  collection: Collection
+}
+
+const NFTDropPage = ({ collection }: Props) => {
   const connect = useMetamask()
   const address = useAddress()
   const disconnect = useDisconnect()
