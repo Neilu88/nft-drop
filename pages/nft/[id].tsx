@@ -1,4 +1,10 @@
+import { useAddress, useDisconnect, useMetamask } from "@thirdweb-dev/react"
+
 const NFTDropPage = () => {
+  const connect = useMetamask()
+  const address = useAddress()
+  const disconnect = useDisconnect()
+
   return (
     <div className="flex h-screen flex-col lg:grid lg:grid-cols-10">
       {/* Left */}
@@ -32,14 +38,24 @@ const NFTDropPage = () => {
             </span>{" "}
             NFT MARKET PLACE
           </h1>
+
           <button
+            onClick={() => (!address ? connect() : disconnect())}
             draggable={false}
             className="rounded-full bg-purple-400 px-4 py-2 text-xs font-bold text-white lg:px-5 lg:py-3 lg:text-base select-none"
           >
-            Sign In
+            {!address ? "Connect Wallet" : "Disconnect"}
           </button>
         </header>
         <hr className="my-2 border" />
+        {address && (
+          <p className="text-center text-sm text-blue-400">
+            You're logged in with wallet{" "}
+            {address.substring(0, 5) +
+              "..." +
+              address.substring(address.length - 5)}{" "}
+          </p>
+        )}
 
         {/* Content */}
         <div className="mt-10 select-none flex flex-col flex-1 items-center text-center lg:space-y-0 space-y-6 lg:justify-center">
@@ -55,7 +71,10 @@ const NFTDropPage = () => {
 
           <p className="pt-2 text-xl text-green-500">10 / 20 NFT's claimed</p>
         </div>
-        <button className="h-16 w-full bg-blue-600 text-white rounded-full mt-10">
+        <button
+          draggable={false}
+          className="select-none h-16 w-full bg-blue-600 text-white rounded-full mt-10"
+        >
           Mint NFT (0.001 ETH)
         </button>
       </div>
