@@ -30,7 +30,7 @@ const Home = ({ collections }: Props) => {
               <div className="cursor-pointer flex flex-col items-center transition-all duration-200 hover:scale-105">
                 <img
                   src={urlFor(collection.mainImage).url()}
-                  className="h-96 w-60 rounded-2xl object-cover "
+                  className="h-96 w-60 rounded-2xl object-cover"
                 />
                 <div className="p-5">
                   <h2 className="text-3xl">{collection.title}</h2>
